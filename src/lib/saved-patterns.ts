@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { frac } from './fraction'
 import { type Item, type Measure, type Note, type Pattern, voice } from './rhythm'
+import { readMigrated, storageKey } from './storage'
 import { BPM_MAX, BPM_MIN } from './tempo'
 
 // 作ったリズムに名前を付けて、ブラウザの localStorage に保存する
-const STORAGE_KEY = 'savedPatterns'
+const STORAGE_KEY = storageKey('savedPatterns')
 
 export type SavedPattern = {
   id: string
@@ -75,7 +76,7 @@ function readEntry(x: unknown): SavedPattern | null {
 // 壊れたものだけ読み飛ばす
 function readAll(): SavedPattern[] {
   try {
-    const parsed: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]')
+    const parsed: unknown = JSON.parse(readMigrated('savedPatterns', 'savedPatterns') ?? '[]')
     if (!Array.isArray(parsed)) return []
     return parsed.map(readEntry).filter((e): e is SavedPattern => e !== null)
   } catch {

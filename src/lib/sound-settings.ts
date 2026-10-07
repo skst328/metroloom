@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { type SoundId, SOUNDS } from './sounds'
+import { readMigrated, storageKey } from './storage'
 
 // 音色と音量だけ、リロードしても残るよう localStorage に保存する
-const STORAGE_KEY = 'soundSettings'
+const STORAGE_KEY = storageKey('soundSettings')
 
 export type SoundSettings = { sounds: SoundId[]; volumes: number[] }
 
@@ -14,7 +15,7 @@ const SOUND_IDS = new Set<string>(SOUNDS.map((s) => s.id))
 // 保存した値が壊れている・形が古いときは、その項目だけ初期値に戻す
 function readSettings(): SoundSettings {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = readMigrated('soundSettings', 'soundSettings')
     if (!raw) return DEFAULT
     const parsed: unknown = JSON.parse(raw)
     if (typeof parsed !== 'object' || parsed === null) return DEFAULT

@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
+import { storageKey } from './storage'
 
 export type Theme = 'system' | 'light' | 'dark'
 
-// index.html の先読みスクリプトと同じキーを使う
-const STORAGE_KEY = 'theme'
+// index.html の先読みスクリプトと同じキーを使う。
+// 前の 'theme' からは引き継がない。同じドメインのほかのアプリが使っているキーの可能性があるため
+const STORAGE_KEY = storageKey('theme')
 
 const DARK_QUERY = '(prefers-color-scheme: dark)'
 
