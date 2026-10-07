@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Metroloom">
+  <rect width="32" height="32" rx="7" fill="#2d69de" />
+  <!-- 連桁でつないだ 8 分音符 2 つ -->
+  <g fill="#ffffff">
+    <ellipse cx="10.4" cy="22.6" rx="3.5" ry="2.6" transform="rotate(-20 10.4 22.6)" />
+    <ellipse cx="20.6" cy="20.6" rx="3.5" ry="2.6" transform="rotate(-20 20.6 20.6)" />
+    <rect x="12.9" y="9" width="1.9" height="13.6" />
+    <rect x="23.1" y="7" width="1.9" height="13.6" />
+    <polygon points="12.9,8.4 25,6.2 25,10 12.9,12.2" />
+  </g>
+</svg>
