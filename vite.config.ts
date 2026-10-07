@@ -10,7 +10,9 @@ const { version } = JSON.parse(readFileSync(path.resolve(import.meta.dirname, 'p
 }
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  // GitHub Pages ではリポジトリ名のパスの下に置かれる。開発サーバーは / のままにする
+  base: mode === 'production' ? '/metroloom/' : '/',
   plugins: [react(), tailwindcss()],
   define: {
     __APP_VERSION__: JSON.stringify(version),
@@ -20,4 +22,4 @@ export default defineConfig({
       '@': path.resolve(import.meta.dirname, './src'),
     },
   },
-})
+}))
